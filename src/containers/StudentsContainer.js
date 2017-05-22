@@ -2,6 +2,9 @@ import React, { Component } from 'react'
 
 import StudentList from '../components/StudentList'
 import StudentForm from '../components/StudentForm'
+import StudentDetail from '../components/StudentDetail'
+
+import { Switch, Route } from 'react-router-dom'
 
 import { fetchStudents, createStudent }  from '../api'
 
@@ -12,7 +15,6 @@ class StudentsContainer extends Component {
     this.state = {
       names: []
     }
-
   }
 
   componentDidMount(){
@@ -32,10 +34,16 @@ class StudentsContainer extends Component {
     return (
       <div>
         < StudentList students={this.state.names} />
-        < StudentForm  onSubmit={ this.handleAddStudent.bind(this) }/>
+        <Switch>
+          < Route exact path="/students/new" component={StudentForm} />
+          < Route exact path="/students/5" component={StudentDetail} />
+        </Switch>
+
       </div>
     )
   }
 }
 
 export default StudentsContainer
+
+//< StudentForm  onSubmit={ this.handleAddStudent.bind(this) }/>
